@@ -13,13 +13,15 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2015']
-                }
+                exclude: /node_modules/
+            },
+            {
+              test: /\.less$/,
+              loader: ['style-loader','css-loader', 'less-loader']
             }
         ]
-    },
+      }  ,
+
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
