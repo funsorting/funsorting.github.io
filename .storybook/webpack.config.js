@@ -6,7 +6,8 @@ module.exports = {
       {
         test: /\.less$/,
         loaders: ["style-loader", "css-loader", "less-loader"],
-        include: path.resolve(__dirname, '../src')
+        exclude: /node_modules/,
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../.storybook')]
       }
     ]
   }

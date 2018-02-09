@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import SortElement  from './components/SortElement'
+import SortElements  from './components/SortElements'
 
 
 const appDomElement = document.getElementById('app')
 
-ReactDOM.render(<SortElement number={3} />, appDomElement)
+ReactDOM.render(<SortElements />, appDomElement)

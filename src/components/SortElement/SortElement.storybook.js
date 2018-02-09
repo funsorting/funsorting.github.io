@@ -5,5 +5,5 @@ import SortElement from './SortElement'
 
 storiesOf('SortElement', module)
   .add('with number', () => (
-    <SortElement number={3} />
+    <SortElement number={50} />
   ))
