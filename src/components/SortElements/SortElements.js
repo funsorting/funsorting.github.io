@@ -10,7 +10,7 @@ const bem = bemClassName.bind(null, 'sortElements')
 
 const sortElements = (props) => {
   const { onSort, elements } = props
-  const obs = elements.map((x, i) => <SortElement number={x.value} key={i} /> )
+  const obs = elements.map((x, i) => <SortElement number={x.value} key={i} isSorting={x.isSorting} /> )
 
   return (
     <div className={bem()}>
@@ -25,6 +25,7 @@ sortElements.propTypes = {
   elements: PropTypes.arrayOf(
     PropTypes.shape({
       position: PropTypes.number,
+      isSorting: PropTypes.bool,
       value: PropTypes.number
     })
   )

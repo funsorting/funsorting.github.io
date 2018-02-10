@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import SortElement from './../SortElement'
 import SortElements from './SortElements'
 
+
+
+
 class SortElementsState extends Component {
   constructor(props) {
     super(props)
@@ -17,9 +20,11 @@ class SortElementsState extends Component {
 
       elements.push({
         position: i,
-        value: numbers[randomPosition]
+        value: numbers[randomPosition - 1]
       })
     }
+
+    console.log("CABECA", elements)
 
     this.state = {
       elements
@@ -29,7 +34,24 @@ class SortElementsState extends Component {
   }
 
   onSort () {
-    console.log("tacalipau", this.state.elements)
+
+    const update = (list) => {
+      this.setState({
+        elements: list
+      })
+    }
+
+    let timeout
+    this.props.sorter(this.state.elements, (list, i) => {
+      const listCopy = JSON.parse(JSON.stringify(list))
+      if(i){
+        console.log(listCopy[i])
+        listCopy[i].isSorting = true
+      }
+
+      setTimeout(() => update.call(this, listCopy), timeout)
+
+    })
   }
 
   render(){

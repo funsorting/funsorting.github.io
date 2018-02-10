@@ -29,9 +29,16 @@ const sortElement = (props) => {
 
   const [r, g, b] = rgb
 
+  let style = {'backgroundColor': `rgb(${r}, ${g}, ${b})`, 'height': `${number}%`}
+  if(isSorting){
+
+    style = {'backgroundColor': `black`, 'height': `100%`}
+  }
+
+
   return (
     <div className={bem()}>
-      <div className={bem('bar')} style={{'backgroundColor': `rgb(${r}, ${g}, ${b})`, 'height': `${number}%`}}></div>
+      <div className={bem('bar')} style={style}></div>
       <div className={bem('number')}>{number}</div>
     </div>
   )
