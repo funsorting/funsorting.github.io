@@ -5,8 +5,6 @@ import SortElement from './../SortElement'
 import SortElements from './SortElements'
 
 
-
-
 class SortElementsState extends Component {
   constructor(props) {
     super(props)
@@ -17,12 +15,14 @@ class SortElementsState extends Component {
     for(let i = 0; i <= 99; i++) {
       const randomPosition = Math.floor(Math.random() * (numbers.length))
       console.log(numbers.length, randomPosition)
-      numbers.splice(randomPosition, 1);
+
 
       elements.push({
         position: i,
         value: numbers[randomPosition]
       })
+
+      numbers.splice(randomPosition, 1)
     }
 
     console.log("CABECA", elements)
