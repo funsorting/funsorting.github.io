@@ -1,32 +1,55 @@
-function merge(left, right, cb)
-{
-    var result = [];
+const MergeSorter = (list, cb) => {
 
-    while (left.length && right.length) {
-        if (left[0].value <= right[0].value) {
-            result.push(left.shift());
-          //  cb(result)
-        } else {
-            result.push(right.shift());
-          //  cb(result)
+  const setDiferrence = (original, sorted) => {
+    console.log("O", JSON.stringify(original))
+    console.log("S", JSON.stringify(sorted))
+
+    sorted.forEach((s, i) => {
+      const o = original[i]
+
+      const l1 = list.findIndex(x => x.position === o.position)
+      const l2 = list.findIndex(x => x.position === s.position)
+
+      list[l1].value = s.value
+      list[l2].value = o.value
+
+    })
+
+
+    cb(list)
+  }
+
+  const merge = (left, right) => {
+      var result = [];
+
+      const original = left.concat(right)
+
+      //setPosition(left, right)
+
+      while (left.length && right.length) {
+          if (left[0].value <= right[0].value) {
+              result.push(left.shift());
+          } else {
+              result.push(right.shift());
+          }
+      }
+
+
+
+      while (left.length) {
+          result.push(left.shift());
         }
-    }
 
-    while (left.length) {
-        result.push(left.shift());
-      //  cb(result)
-      }
+      while (right.length) {
+          result.push(right.shift());
+        }
 
-    while (right.length) {
-        result.push(right.shift());
-        //cb(result)
-      }
+        setDiferrence(original, result)
+        return result;
+  }
 
-      cb(result)
-    return result;
-}
 
-const MergeSorter = (arr, cb) => {
+  const startMerge = (arr) => {
     if (arr.length < 2)
         return arr;
 
@@ -34,7 +57,12 @@ const MergeSorter = (arr, cb) => {
     var left   = arr.slice(0, middle);
     var right  = arr.slice(middle, arr.length);
 
-    return merge(MergeSorter(left, cb), MergeSorter(right, cb), cb);
+    return merge(startMerge(left), startMerge(right));
+  }
+
+  const listCopy = JSON.parse(JSON.stringify(list))
+  startMerge(listCopy)
+
 }
 
 export default MergeSorter

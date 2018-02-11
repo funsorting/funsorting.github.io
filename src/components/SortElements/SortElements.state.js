@@ -11,16 +11,17 @@ class SortElementsState extends Component {
   constructor(props) {
     super(props)
 
-    const numbers = Array.from(new Array(100), (x,i) => i)
-    const elements = []
-    for(let i = 0; i < 99; i++) {
-      const randomPosition = Math.floor(Math.random() * numbers.length) + 1
+    const numbers = Array.from(new Array(100), (x,i) => i + 1)
 
+    const elements = []
+    for(let i = 0; i <= 99; i++) {
+      const randomPosition = Math.floor(Math.random() * (numbers.length))
+      console.log(numbers.length, randomPosition)
       numbers.splice(randomPosition, 1);
 
       elements.push({
         position: i,
-        value: numbers[randomPosition - 1]
+        value: numbers[randomPosition]
       })
     }
 
@@ -43,6 +44,7 @@ class SortElementsState extends Component {
 
     let timeout
     this.props.sorter(this.state.elements, (list, i) => {
+
       const listCopy = JSON.parse(JSON.stringify(list))
       if(i){
         console.log(listCopy[i])
