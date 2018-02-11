@@ -1,67 +1,80 @@
 const MergeSorter = (list, cb) => {
+  const setAsSorting = (elements) => {
+    const clone = JSON.parse(JSON.stringify(list))
 
-  const setDiferrence = (original, sorted) => {
-    console.log("O", JSON.stringify(original))
-    console.log("S", JSON.stringify(sorted))
+    clone.forEach(x => x.isSorting = false)
 
-    sorted.forEach((s, i) => {
-      const o = original[i]
-
-      const l1 = list.findIndex(x => x.position === o.position)
-      const l2 = list.findIndex(x => x.position === s.position)
-
-      list[l1].value = s.value
-      list[l2].value = o.value
-
+    elements.forEach(x => {
+      const listElem = clone.find(y => y.position === x.position)
+      listElem.isSorting = true
     })
 
+    console.log("CLONE", clone)
+    cb(clone)
+  }
+  const merge = (left, right) => {
+    const original = left.concat(right)
+    setAsSorting(original)
+
+    let result = []
+    let indexLeft = 0
+    let indexRight = 0
+
+    while (indexLeft < left.length && indexRight < right.length) {
+      if (left[indexLeft].value < right[indexRight].value) {
+        result.push(left[indexLeft])
+
+        indexLeft++
+
+      } else {
+        result.push(right[indexRight])
+
+        indexRight++
+      }
+    }
+
+    const ratedR = result.concat(left.slice(indexLeft)).concat(right.slice(indexRight))
+
+
+
+    original.forEach(o => {
+      const c = list.find(x => x.position === o.position)
+      const r = ratedR.find(x => x.position === o.position)
+
+      c.value = r.position
+    })
 
     cb(list)
-  }
 
-  const merge = (left, right) => {
-      var result = [];
-
-      const original = left.concat(right)
-
-      //setPosition(left, right)
-
-      while (left.length && right.length) {
-          if (left[0].value <= right[0].value) {
-              result.push(left.shift());
-          } else {
-              result.push(right.shift());
-          }
-      }
+    console.log("L", left)
+    console.log("R", right)
+    console.log(">", ratedR)
 
 
-
-      while (left.length) {
-          result.push(left.shift());
-        }
-
-      while (right.length) {
-          result.push(right.shift());
-        }
-
-        setDiferrence(original, result)
-        return result;
+    return ratedR
   }
 
 
   const startMerge = (arr) => {
-    if (arr.length < 2)
-        return arr;
+    if (arr.length === 1) {
+      // return once we hit an array with a single item
+      return arr
+    }
 
-    var middle = parseInt(arr.length / 2);
-    var left   = arr.slice(0, middle);
-    var right  = arr.slice(middle, arr.length);
+    const middle = Math.floor(arr.length / 2) // get the middle item of the array rounded down
+    const left = arr.slice(0, middle) // items on the left side
+    const right = arr.slice(middle) // items on the right side
 
-    return merge(startMerge(left), startMerge(right));
+    return merge(
+      startMerge(left),
+      startMerge(right)
+    )
+
   }
 
   const listCopy = JSON.parse(JSON.stringify(list))
-  startMerge(listCopy)
+  const r= startMerge(listCopy)
+  //cb(r)
 
 }
 

@@ -14,7 +14,7 @@ class SortElementsState extends Component {
     const elements = []
     for(let i = 0; i <= 99; i++) {
       const randomPosition = Math.floor(Math.random() * (numbers.length))
-      console.log(numbers.length, randomPosition)
+
 
 
       elements.push({
@@ -25,7 +25,6 @@ class SortElementsState extends Component {
       numbers.splice(randomPosition, 1)
     }
 
-    console.log("CABECA", elements)
 
     this.state = {
       elements
@@ -42,7 +41,12 @@ class SortElementsState extends Component {
       })
     }
 
-    let timeout
+    let timeout = 100
+    const getTimeout = () => {
+      timeout += 100
+      return timeout
+    }
+
     this.props.sorter(this.state.elements, (list, i) => {
 
       const listCopy = JSON.parse(JSON.stringify(list))
@@ -51,7 +55,10 @@ class SortElementsState extends Component {
         listCopy[i].isSorting = true
       }
 
-      setTimeout(() => update.call(this, listCopy), timeout)
+      setTimeout(() => {
+        update.call(this, listCopy)
+        timeout += 1000
+      }, getTimeout())
 
     })
   }
