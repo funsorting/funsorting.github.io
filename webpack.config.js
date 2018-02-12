@@ -6,7 +6,8 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'index_bundle.js'
+        filename: 'index_bundle.js',
+        publicPath: '/'
     },
     module: {
         loaders: [
@@ -18,6 +19,11 @@ module.exports = {
             {
               test: /\.less$/,
               loader: ['style-loader','css-loader', 'less-loader']
+            },
+            {
+              test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
+              loader: 'file',
+              include: path.resolve(__dirname, 'assets')
             }
         ]
       }  ,

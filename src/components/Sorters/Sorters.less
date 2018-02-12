@@ -1,26 +1,8 @@
-.sortElements__sorter {
-
-
-
-
-  height: 100px;
-
-  position: relative;
-
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-
-
-
-}
-
-.sortElements__buttons {
+.sorters {
   display: flex;
   align-items: center;
 }
-
-.sortElements__button {
+.sorters__button {
   flex: 1 0 15%;
 
   border-radius: 0.25rem;
@@ -35,4 +17,11 @@
   background-color: #f3f3f3;
 
   cursor: pointer;
+}
+
+.sorters__button--selected{
+  box-shadow: #420630 0px -1px 0 3px;
+  border: 1px solid #ff00c5;
+  background-color: #f66ecb;
+  margin-top: 0.3rem;
 }
