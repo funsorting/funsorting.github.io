@@ -4,7 +4,7 @@ import bemClassName from 'bem-classname'
 
 import './SortElement.less'
 
-const bem = bemClassName.bind(null, 'sortElement')
+const bem = bemClassName
 
 const sortElement = (props) => {
   const { number, wasSorted, isSorting } = props
@@ -29,17 +29,26 @@ const sortElement = (props) => {
 
   const [r, g, b] = rgb
 
-  let style = {'backgroundColor': `rgb(${r}, ${g}, ${b})`, 'height': `${number}%`}
-  if(isSorting){
 
-    style = {'backgroundColor': `black`, 'height': `100%`}
+  const height = isSorting ? 100 : number
+
+  const style = {
+    'backgroundColor': `rgb(${r}, ${g}, ${b})`,
+    'boxShadow': `rgb(${r - 20}, ${g - 20}, ${b - 20}) -1px -1px, rgb(${r + 20}, ${g + 20}, ${b + 20}) 1px 1px`,
+    'height': `${height}%`
   }
 
-
   return (
-    <div className={bem()}>
-      <div className={bem('bar')} style={style}></div>
-      <div className={bem('number')}>{number}</div>
+    <div className={bem('sortElement')}>
+      <div className={bem('sortElement', 'element', [isSorting ? 'isSorting' : ''])}>
+
+        <div className={bem('sortElement' ,'number')}>{number}</div>
+        <div className={bem('sortElement', 'barContainer')}>
+          <div className={bem('sortElement', 'bar', [isSorting ? 'isSorting' : ''])} style={style}></div>
+        </div>
+      </div>
+
+
     </div>
   )
 }

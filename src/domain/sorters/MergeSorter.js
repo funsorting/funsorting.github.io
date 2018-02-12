@@ -1,20 +1,8 @@
 const MergeSorter = (list, cb) => {
-  const setAsSorting = (elements) => {
-    const clone = JSON.parse(JSON.stringify(list))
 
-    clone.forEach(x => x.isSorting = false)
-
-    elements.forEach(x => {
-      const listElem = clone.find(y => y.position === x.position)
-      listElem.isSorting = true
-    })
-
-    console.log("CLONE", clone)
-    cb(clone)
-  }
   const merge = (left, right) => {
     const original = left.concat(right)
-    setAsSorting(original)
+    //setAsSorting(original)
 
     let result = []
     let indexLeft = 0
@@ -37,19 +25,9 @@ const MergeSorter = (list, cb) => {
 
 
 
-    original.forEach(o => {
-      const c = list.find(x => x.position === o.position)
-      const r = ratedR.find(x => x.position === o.position)
-
-      c.value = r.position
-    })
-
-    cb(list)
-
-    console.log("L", left)
-    console.log("R", right)
-    console.log(">", ratedR)
-
+    // console.log("L", left)
+    // console.log("R", right)
+    // console.log(">", ratedR)
 
     return ratedR
   }
@@ -65,10 +43,39 @@ const MergeSorter = (list, cb) => {
     const left = arr.slice(0, middle) // items on the left side
     const right = arr.slice(middle) // items on the right side
 
-    return merge(
-      startMerge(left),
-      startMerge(right)
-    )
+
+
+    const mergeL = startMerge(left)
+    const mergeR = startMerge(right)
+
+    const merged = mergeL.concat(mergeR)
+
+
+
+    const rr = merge(mergeL, mergeR)
+
+    const cc = list
+    arr.forEach((a, i) => {
+      const c = cc.find(x => x.position === a.position)
+      c.value = rr[i].value
+      c.isSorting = true
+    })
+
+    cb(cc)
+
+    list.forEach((x) => x.isSorting = false)
+
+    cb(list)
+    /*
+
+    merged.forEach((m, i) => {
+      cc[i].value = m.position
+    })
+
+    cb(cc)
+    */
+
+    return rr
 
   }
 

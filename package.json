@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_PATH=./ mocha -c -S --recursive --compilers js:babel-core/register --require ignore-styles --require src/**/*.spec.js"
   },
   "repository": {
     "type": "git",

@@ -9,4 +9,4 @@ import InsertionSorter from './domain/sorters/InsertionSorter'
 
 const appDomElement = document.getElementById('app')
 
-ReactDOM.render([<SortElements sorter={BubbleSorter} />, <SortElements sorter={MergeSorter} />, <SortElements sorter={InsertionSorter} />], appDomElement)
+ReactDOM.render(<SortElements sorter={InsertionSorter} />, appDomElement)
