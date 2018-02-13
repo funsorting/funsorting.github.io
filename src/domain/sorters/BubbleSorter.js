@@ -1,30 +1,3 @@
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var oscillator = audioCtx.createOscillator();
-
-let last
-function playNote(frequency, duration) {
-
-oscillator.type = 'square';
-oscillator.frequency.value = frequency; // value in hertz
-oscillator.connect(audioCtx.destination);
-
-  if(last) {
-    oscillator.stop();
-  }
-
-  oscillator.start();
-
-
-
- last = setTimeout(
-    function(){
-        oscillator.stop();
-    }, duration);
-
-
-}
-
-
 const BubbleSorter = (list, changeCallback) => {
     let temp
     const n = list.length
@@ -40,7 +13,6 @@ const BubbleSorter = (list, changeCallback) => {
               list[i].value=list[i+1].value;
               list[i+1].value=temp;
               changeCallback(list, i)
-              playNote(500, 10)
           }
       }
 

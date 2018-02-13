@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import bemClassName from 'bem-classname'
 
+import Button from '../Button'
 import SortElements from '../SortElements'
 
 import './Sorters.less'
@@ -9,19 +10,35 @@ import './Sorters.less'
 const bem = bemClassName.bind(null, 'sorters')
 
 const sortElements = (props) => {
-  const { onSort, onShuffle, elements } = props
-  console.log("PA", elements)
+  const { onSort, onShuffle, shuffleMethod } = props
+
   return (
     <div>
       <div className={bem()}>
           <span>Shuffle method:</span>
-          <a className={bem('button', ['selected'])}>random</a>
-          <a className={bem('button')}>reversed</a>
-          <a className={bem('button')}>almost</a>
-          <a className={bem('button')}>uniques</a>
+          <Button
+            text={'random'}
+            onClick={() => onShuffle('RANDOM')}
+            isSelected={shuffleMethod === 'RANDOM'}
+          />
+          <Button
+            text={'reversed'}
+            onClick={() => onShuffle('REVERSED')}
+            isSelected={shuffleMethod === 'REVERSED'}
+          />
+          <Button
+            text={'almost'}
+            onClick={() => onShuffle('ALMOST')}
+            isSelected={shuffleMethod === 'ALMOST'}
+          />
+          <Button
+            text={'uniques'}
+            onClick={() => onShuffle('UNIQUES')}
+            isSelected={shuffleMethod === 'UNIQUES'}
+          />
       </div>
       <div>
-        <SortElements elements={elements} />
+        <SortElements elements={props.elements} />
       </div>
     </div>
 
@@ -29,7 +46,6 @@ const sortElements = (props) => {
 }
 
 sortElements.propTypes = {
-  onSort: PropTypes.func.isRequired,
   onShuffle: PropTypes.func.isRequired
 }
 

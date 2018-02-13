@@ -1,0 +1,36 @@
+.button {
+  flex: 1 0 15%;
+
+  border-radius: 0.25rem;
+  text-align: center;
+  margin: 0 0.5rem;
+  padding: 0.2rem 0;
+
+  color: #300425;
+
+  box-shadow: #dad5d8 2px 2px 0 3px;
+  border: 1px solid #ffffff;
+  background-color: #f3f3f3;
+
+  cursor: pointer;
+
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+
+
+  &:hover {
+    background-color: #f66ecb;
+    box-shadow: #420630 2px 2px 0 3px;
+
+  }
+
+  &--selected, &:active {
+    box-shadow: #420630 0px -1px 0 3px;
+    border: 1px solid #ff00c5;
+    background-color: #f66ecb;
+    margin-top: 0.3rem;
+
+    &:hover {
+      box-shadow: #420630 0px -1px 0 3px;
+    }
+  }
+}
