@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+require("babel-polyfill");
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {

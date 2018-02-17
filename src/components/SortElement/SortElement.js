@@ -10,7 +10,7 @@ const sortElement = (props) => {
   const { number, wasSorted, isSorting } = props
 
   const rgb = [0, 0, 0]
-  const colorMultiplier = number * 7
+  const colorMultiplier = number * 15
 
   if(colorMultiplier < 255){
     rgb[0] = 255
@@ -30,7 +30,7 @@ const sortElement = (props) => {
   const [r, g, b] = rgb
 
 
-  const height = isSorting ? 100 : number
+  const height = isSorting ? 100 : number * 2
 
   const style = {
     'backgroundColor': `rgb(${r}, ${g}, ${b})`,

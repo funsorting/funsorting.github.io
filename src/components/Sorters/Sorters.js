@@ -10,7 +10,12 @@ import './Sorters.less'
 const bem = bemClassName.bind(null, 'sorters')
 
 const sortElements = (props) => {
-  const { onSort, onShuffle, shuffleMethod } = props
+  const {
+    onSort,
+    onShuffle,
+    shuffleMethod,
+    elements
+  } = props
 
   return (
     <div>
@@ -38,7 +43,11 @@ const sortElements = (props) => {
           />
       </div>
       <div>
-        <SortElements elements={props.elements} />
+        <SortElements
+          elements={elements}
+          onShuffle={onShuffle}
+          shuffleMethod={shuffleMethod}
+        />
       </div>
     </div>
 
@@ -46,7 +55,8 @@ const sortElements = (props) => {
 }
 
 sortElements.propTypes = {
-  onShuffle: PropTypes.func.isRequired
+  onShuffle: PropTypes.func.isRequired,
+  shuffleMethod: PropTypes.string.isRequired
 }
 
 export default sortElements

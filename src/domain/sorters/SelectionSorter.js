@@ -26,6 +26,9 @@ const SelectionSorter = (items, cb) => {
       cb(items)
 		}
 	}
+
+	items.forEach((x) => x.isSorting = false)
+	cb(items)
 }
 
 export default SelectionSorter

@@ -55,7 +55,6 @@ const sortElements = ({ onSort, elements, sortMethodName }) => {
 
 sortElements.propTypes = {
   onSort: PropTypes.func.isRequired,
-  sortMethodName: PropTypes.string.isRequired,
   elements: PropTypes.arrayOf(
     PropTypes.shape({
       position: PropTypes.number,

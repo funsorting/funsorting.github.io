@@ -23,8 +23,25 @@ class SortElementsState extends Component {
     this.onSort = this.onSort.bind(this)
   }
 
-  componentWillReceiveProps({ elements }) {
-    this.setState({ elements })
+  cancelCurrentSorting = () => {
+    this.timeouts.forEach(t => clearTimeout(t))
+    this.timeouts = []
+  }
+
+  componentWillReceiveProps({ elements, shuffleMethod }) {
+    const hasShuffleMethodChanged = this.props.shuffleMethod !== shuffleMethod
+    const hasToNeedToSortAgain = this.state.sortMethodName && !this.timeouts
+
+    this.setState({
+      elements
+    }, () => {
+      if(this.state.sortMethodName && hasShuffleMethodChanged){
+        this.cancelCurrentSorting()
+        this.props.onShuffle(undefined, () => {
+          this.onSort(this.state.sortMethodName)
+        })
+      }
+    })
   }
 
   componentDidMount() {
@@ -33,7 +50,7 @@ class SortElementsState extends Component {
     ,2000)
   }
 
-  onSort (sortMethodName = 'INSERTION') {
+  async onSort (sortMethodName = 'INSERTION') {
     if(sortMethodName === 'INSERTION'){
       this.sorter = InsertionSorter
     }
@@ -64,7 +81,19 @@ class SortElementsState extends Component {
       })
     }
 
-    this.timeouts.forEach(t => clearTimeout(t))
+    if(this.timeouts.length) {
+      const waitForReRandomizing = () => {
+        return new Promise((resolve) => {
+          this.props.onShuffle(undefined, () => {
+            resolve()
+          })
+        })
+      }
+
+      await waitForReRandomizing()
+    }
+
+    this.cancelCurrentSorting()
 
     let timeout = 0
     const getTimeout = () => {
@@ -75,7 +104,6 @@ class SortElementsState extends Component {
     this.sorter(this.props.elements, (list, i) => {
       const listCopy = JSON.parse(JSON.stringify(list))
       if(i){
-        console.log(listCopy[i])
         listCopy[i].isSorting = true
       }
 
@@ -84,8 +112,6 @@ class SortElementsState extends Component {
       }, getTimeout())
 
       this.timeouts.push(newTimeout)
-
-
     })
   }
 
@@ -101,6 +127,8 @@ class SortElementsState extends Component {
 }
 
 SortElementsState.propTypes = {
+  onShuffle: PropTypes.func.isRequired,
+  shuffleMethod: PropTypes.string.isRequired,
   elements: PropTypes.arrayOf(
     PropTypes.shape({
       position: PropTypes.number,

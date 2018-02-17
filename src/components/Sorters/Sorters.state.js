@@ -10,7 +10,7 @@ class SortersState extends Component {
 
     this.state = {
       elements: [],
-      shuffleMethod: 'RANDOM'
+      shuffleMethod: undefined
     }
 
     this.onShuffle = this.onShuffle.bind(this)
@@ -20,13 +20,20 @@ class SortersState extends Component {
     this.onShuffle('RANDOM')
   }
 
+  onShuffle (shuffleMethod, callback) {
+    if(!this.state.shuffleMethod && !shuffleMethod){
+      shuffleMethod = 'RANDOM'
+    }
 
-  onShuffle (shuffleMethod = 'RANDOM') {
+    if(!shuffleMethod){
+      shuffleMethod = this.state.shuffleMethod
+    }
+
     this.setState({
       shuffleMethod
     })
 
-    const numbers = Array.from(new Array(100), (x,i) => i + 1)
+    const numbers = Array.from(new Array(50), (x,i) => i + 1)
     const numbersToElements = (numbers) => numbers.map((x, i) => ({
       position: i,
       value: x
@@ -35,27 +42,27 @@ class SortersState extends Component {
     if(shuffleMethod === 'ALMOST') {
       this.setState({
         elements: numbersToElements(Shuffler.shuffleAlmost(numbers))
-      })
+      }, callback)
     }
 
     if(shuffleMethod === 'REVERSED'){
       this.setState({
         elements: numbersToElements(Shuffler.shuffleReversed(numbers))
-      })
+      }, callback)
     }
 
     if(shuffleMethod === 'UNIQUES'){
       this.setState({
         elements: numbersToElements(Shuffler.shuffleRandom(Shuffler.shuffleUniques(numbers)))
-      })
+      }, callback)
     }
 
     if(shuffleMethod === 'RANDOM'){
+      console.log("going to shuffle random")
       this.setState({
         elements: numbersToElements(Shuffler.shuffleRandom(numbers))
-      })
+      }, callback)
     }
-
   }
 
   render() {
