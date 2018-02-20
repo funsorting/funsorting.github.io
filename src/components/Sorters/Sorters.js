@@ -14,7 +14,9 @@ const sortElements = (props) => {
     onSort,
     onShuffle,
     shuffleMethod,
-    elements
+    elements,
+    onStartSorting,
+    hasToResort
   } = props
 
   return (
@@ -47,7 +49,10 @@ const sortElements = (props) => {
           elements={elements}
           onShuffle={onShuffle}
           shuffleMethod={shuffleMethod}
+          onStartSorting={onStartSorting}
+          hasToResort={hasToResort}
         />
+        
       </div>
     </div>
 
@@ -56,7 +61,8 @@ const sortElements = (props) => {
 
 sortElements.propTypes = {
   onShuffle: PropTypes.func.isRequired,
-  shuffleMethod: PropTypes.string.isRequired
+  shuffleMethod: PropTypes.string.isRequired,
+  hasToResort: PropTypes.bool
 }
 
 export default sortElements

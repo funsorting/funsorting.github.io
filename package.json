@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --progress --colors",
     "start": "webpack-dev-server --progress --colors",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "NODE_PATH=./ mocha -c -S --recursive --compilers js:babel-core/register --require ignore-styles --require src/**/*.spec.js"

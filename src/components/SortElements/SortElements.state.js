@@ -16,9 +16,10 @@ class SortElementsState extends Component {
 
     this.state = {
       sortMethodName: '',
-      elements: props.elements
+      elements: props.elements,
     }
 
+    this.lastTimeUpdated = new Date()
     this.timeouts = []
     this.onSort = this.onSort.bind(this)
   }
@@ -28,14 +29,20 @@ class SortElementsState extends Component {
     this.timeouts = []
   }
 
-  componentWillReceiveProps({ elements, shuffleMethod }) {
+  componentWillReceiveProps({ elements, shuffleMethod, hasToResort }) {
     const hasShuffleMethodChanged = this.props.shuffleMethod !== shuffleMethod
-    const hasToNeedToSortAgain = this.state.sortMethodName && !this.timeouts
+
+    if(hasToResort) {
+      console.log("hasToResort called on sortelements")
+      //this.cancelCurrentSorting()
+    }
 
     this.setState({
       elements
     }, () => {
-      if(this.state.sortMethodName && hasShuffleMethodChanged){
+      const isNotFirstRun = this.state.sortMethodName
+
+      if(isNotFirstRun && (hasShuffleMethodChanged)){
         this.cancelCurrentSorting()
         this.props.onShuffle(undefined, () => {
           this.onSort(this.state.sortMethodName)
@@ -51,6 +58,8 @@ class SortElementsState extends Component {
   }
 
   async onSort (sortMethodName = 'INSERTION') {
+    this.props.onStartSorting()
+
     if(sortMethodName === 'INSERTION'){
       this.sorter = InsertionSorter
     }
@@ -101,7 +110,7 @@ class SortElementsState extends Component {
       return timeout
     }
 
-    this.sorter(this.props.elements, (list, i) => {
+    this.sorter(JSON.parse(JSON.stringify(this.props.elements)), (list, i) => {
       const listCopy = JSON.parse(JSON.stringify(list))
       if(i){
         listCopy[i].isSorting = true
@@ -129,6 +138,8 @@ class SortElementsState extends Component {
 SortElementsState.propTypes = {
   onShuffle: PropTypes.func.isRequired,
   shuffleMethod: PropTypes.string.isRequired,
+  onStartSorting: PropTypes.func.isRequired,
+  hasToResort: PropTypes.bool,
   elements: PropTypes.arrayOf(
     PropTypes.shape({
       position: PropTypes.number,

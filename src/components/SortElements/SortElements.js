@@ -44,7 +44,6 @@ const sortElements = ({ onSort, elements, sortMethodName }) => {
           isSelected={sortMethodName === 'MERGE'}
           onClick={() => onSort('MERGE')}
         />
-
       </div>
     </div>
 

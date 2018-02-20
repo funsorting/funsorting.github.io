@@ -23,12 +23,6 @@ const MergeSorter = (list, cb) => {
 
     const ratedR = result.concat(left.slice(indexLeft)).concat(right.slice(indexRight))
 
-
-
-    // console.log("L", left)
-    // console.log("R", right)
-    // console.log(">", ratedR)
-
     return ratedR
   }
 

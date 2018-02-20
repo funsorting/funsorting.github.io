@@ -10,14 +10,23 @@ class SortersState extends Component {
 
     this.state = {
       elements: [],
-      shuffleMethod: undefined
+      shuffleMethod: undefined,
+      hasToResort: false
     }
 
     this.onShuffle = this.onShuffle.bind(this)
+    this.onStartSorting = this.onStartSorting.bind(this)
   }
 
   componentDidMount() {
     this.onShuffle('RANDOM')
+  }
+
+  onStartSorting () {
+    console.log("please dont call me too much")
+    this.setState({
+      hasToResort: true
+    })
   }
 
   onShuffle (shuffleMethod, callback) {
@@ -58,18 +67,20 @@ class SortersState extends Component {
     }
 
     if(shuffleMethod === 'RANDOM'){
-      console.log("going to shuffle random")
       this.setState({
         elements: numbersToElements(Shuffler.shuffleRandom(numbers))
       }, callback)
     }
+
   }
 
   render() {
     return <Sorters
       elements={this.state.elements}
-      shuffleMethod={this.state.shuffleMethod}
+      shuffleMethod={this.state.shuffleMethod || ''}
       onShuffle={this.onShuffle}
+      onStartSorting={this.onStartSorting}
+      hasToResort={this.state.hasToResort}
     />
   }
 }
