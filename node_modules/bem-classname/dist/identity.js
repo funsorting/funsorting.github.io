@@ -1,0 +1,12 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = identity;
+
+function identity(a) {
+  return a;
+}
+
+module.exports = exports["default"];
