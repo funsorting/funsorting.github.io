@@ -1,9 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import SortElements from './SortElements'
+import SorterElements from './SorterElements'
 
-storiesOf('SortElements', module)
+storiesOf('SorterElements', module)
   .add('with elements', () => (
-    <SortElements />
+    <SorterElements />
   ))

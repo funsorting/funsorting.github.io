@@ -6,16 +6,16 @@ const InsertionSorter = (list, callback) => {
 		for (var j = i - 1; j >= 0 && (list[j].value > tmp); j--) {
 			//Shift the number
 			list[j + 1].value = list[j].value;
-      callback(list, j)
+      callback(JSON.parse(JSON.stringify(list)), j)
 		}
 		//Insert the copied number at the correct position
 		//in sorted part.
 		list[j + 1].value = tmp;
-    callback(list, i)
+    callback(JSON.parse(JSON.stringify(list)), i)
 
 	}
 
-  callback(list)
+  callback(JSON.parse(JSON.stringify(list)))
 }
 
 export default InsertionSorter

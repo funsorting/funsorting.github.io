@@ -11,7 +11,7 @@ const QuickSort = (list, cb) => {
         x.isSorting = false
       }
     })
-    cb(list)
+    cb(JSON.parse(JSON.stringify(list)))
   }
 
   const partition = (arr, pivot, left, right) => {
@@ -47,7 +47,7 @@ const QuickSort = (list, cb) => {
 
   quickSort(list, 0, list.length - 1)
   list.forEach(x => x.isSorting = false)
-  cb(list)
+  cb(JSON.parse(JSON.stringify(list)))
 }
 
 export default QuickSort

@@ -29,16 +29,26 @@ const shuffleUniques = (numbers) => {
   const amount = Math.floor(numbers.length / 5)
   for(let i = 1; i < numbers.length; i += amount){
     numbers.fill(i + amount - 1, i - 1, i + amount - 1)
-    
-
   }
 
-  return numbers
+  return shuffleRandom(numbers)
 }
 
-export default {
-  shuffleRandom,
-  shuffleReversed,
-  shuffleAlmost,
-  shuffleUniques
-}
+export default [
+  {
+    id: 'RANDOM',
+    shufflerFunction: shuffleRandom
+  },
+  {
+    id: 'REVERSED',
+    shufflerFunction: shuffleReversed
+  },
+  {
+    id: 'ALMOST',
+    shufflerFunction: shuffleAlmost
+  },
+  {
+    id: 'UNIQUES',
+    shufflerFunction: shuffleUniques
+  }
+]
