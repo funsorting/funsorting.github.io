@@ -1,0 +1,5 @@
+{
+ "name": "Shuffler",
+ "private": true,
+ "main": "./Shuffler.state.js"
+}

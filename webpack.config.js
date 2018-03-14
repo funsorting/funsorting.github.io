@@ -10,6 +10,15 @@ module.exports = {
         filename: 'index_bundle.js',
         publicPath: '/'
     },
+    resolve: {
+      modules: [
+        path.resolve(__dirname, 'src'),
+        'node_modules'
+      ],
+      alias: {
+        src: path.resolve(__dirname, 'src/')
+      }
+    },
     module: {
         loaders: [
             {

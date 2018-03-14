@@ -23,12 +23,12 @@ const SelectionSorter = (items, cb) => {
         }
       })
 
-      cb(items)
+      cb(JSON.parse(JSON.stringify(items)))
 		}
 	}
 
 	items.forEach((x) => x.isSorting = false)
-	cb(items)
+	cb(JSON.parse(JSON.stringify(items)))
 }
 
 export default SelectionSorter

@@ -12,11 +12,11 @@ const BubbleSorter = (list, changeCallback) => {
               temp=list[i].value;
               list[i].value=list[i+1].value;
               list[i+1].value=temp;
-              changeCallback(list, i)
+              changeCallback(JSON.parse(JSON.stringify(list)), i)
           }
       }
 
-    changeCallback(list)
+    changeCallback(JSON.parse(JSON.stringify(list)))
 }
 
 export default BubbleSorter

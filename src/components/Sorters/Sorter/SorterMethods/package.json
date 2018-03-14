@@ -1,0 +1,5 @@
+{
+ "name": "SorterMethods",
+ "private": true,
+ "main": "./SorterMethods.state.js"
+}
