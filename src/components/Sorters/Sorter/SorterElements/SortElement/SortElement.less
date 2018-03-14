@@ -42,13 +42,22 @@
   text-align: center;
   font-size: 6px;
 
-  
+
 }
 
 .sortElement__element--isSorting{
-  background-color: black;
+  background-color: white;
+  color:red;
 }
 
 .sortElement__bar--isSorting {
   background-color: black !important;
+  border: 1px solid black;
+  animation: blinker 0.1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    background-color: grey;
+  }
 }

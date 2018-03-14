@@ -8,7 +8,7 @@ import './Shuffler.less'
 
 const bem = bemClassName.bind(null, 'shuffler')
 
-const Shuffler = ({ options, selectedOption, onShuffleClick }) => (
+const Shuffler = ({ options, selectedOption, onShuffleClick, hasToShowSound, onSoundClick, hasSound }) => (
   <div className={bem()}>
     <span>Shuffle method:</span>
     <div className={bem('buttons')}>
@@ -23,13 +23,27 @@ const Shuffler = ({ options, selectedOption, onShuffleClick }) => (
         )
       }
     </div>
+    {
+      hasToShowSound ?
+      <span>
+        <span>Sound:</span>
+        <Button
+          text={hasSound ? 'ON' : 'OFF'}
+          isSelected={hasSound}
+          onClick={() => onSoundClick()}
+        />
+      </span>
+      : null
+    }
   </div>
 )
 
 Shuffler.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedOption: PropTypes.object.isRequired,
-  onShuffleClick: PropTypes.func.isRequired
+  onShuffleClick: PropTypes.func.isRequired,
+  onSoundClick: PropTypes.func.isRequired,
+  hasSound: PropTypes.bool.isRequired
 }
 
 export default Shuffler

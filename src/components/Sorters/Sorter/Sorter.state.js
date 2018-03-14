@@ -10,9 +10,19 @@ class SorterState extends Component {
   constructor(props) {
     super(props)
 
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    this.oscillator = audioCtx.createOscillator();
+    this.oscillator.type = 'square';
+     // value in hertz
+    this.oscillator.connect(audioCtx.destination);
+
     if(this.props.id === 0){
       this.shufflerOption = Shufflers[0]
       this.sorterMethodsOption = Sorters[0]
+      this.hasToShowSound = true
+
+      this.oscillator.start();
+      this.oscillator.frequency.value = 0
     }
 
     if(this.props.id === 1){
@@ -22,15 +32,30 @@ class SorterState extends Component {
 
     this.elements = []
     this.sortTickTimeouts = []
+
+
+    this.hasToPlay = false
+    console.log("A", this.hasToPlay)
+    this.isSorting = false
+
+    this.onSoundClick = this.onSoundClick.bind(this)
+  }
+
+  onSoundClick() {
+    this.hasToPlay = !this.hasToPlay
+    if(!this.hasToPlay){
+      this.oscillator.frequency.value = 0
+    }
+  }
+  playSound (frequency) {
+    this.oscillator.frequency.value = frequency;
   }
 
   componentDidMount() {
     this.onShuffleClick(this.shufflerOption)
   }
 
-  componentWillReceiveProps(oi) {
-    console.log("oi", oi)
-  }
+
 
   warnSorterChange = () => {
     this.props.warnSorterChange({
@@ -70,12 +95,14 @@ class SorterState extends Component {
 
   sort = () => {
     this.cancelCurrentSorting()
+    this.isSorting = true
 
     let accumulativeTimeoutTime = 0
     const getNextTimeoutTime = () => {
       accumulativeTimeoutTime += 50
       return accumulativeTimeoutTime
     }
+    let timeouts = 0;
 
     this.sorterMethodsOption.sorter(this.elements, (list, i) => {
       const listCopy = list
@@ -83,15 +110,36 @@ class SorterState extends Component {
         listCopy[i].isSorting = true
       }
 
+
+
+
       const newTimeout = setTimeout(() => {
+
+
         this.elements = list
         this.forceUpdate()
+
+
+
+        const y = i
+        const note = y * 30
+
+        timeouts--
+        if(note > 0 && this.hasToPlay){
+          this.playSound(note)
+        }
+        if(timeouts === 0){
+          console.log(">>>>>>>>>")
+          this.oscillator.frequency.value = 0
+        }
+
       }, getNextTimeoutTime())
 
       this.sortTickTimeouts.push(newTimeout)
-
-
     })
+
+    timeouts = this.sortTickTimeouts.length
+
 
   }
 
@@ -104,6 +152,8 @@ class SorterState extends Component {
       onSorterMethodsClick={this.onSorterMethodsClick}
       shufflerOption={this.shufflerOption}
       sorterMethodsOption={this.sorterMethodsOption}
+      hasToShowSound={this.hasToShowSound}
+      onSoundClick={this.onSoundClick}
     />
   }
 }

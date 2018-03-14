@@ -24,12 +24,14 @@ const sortElements = (props) => {
     hasToResort
     */
     shufflerOption,
-    sorterMethodsOption
+    sorterMethodsOption,
+    hasToShowSound,
+    onSoundClick
   } = props
 
   return (
     <div className={bem()}>
-      <Shuffler onShuffleClick={onShuffleClick} shufflerOption={shufflerOption} />
+      <Shuffler onShuffleClick={onShuffleClick} shufflerOption={shufflerOption} hasToShowSound={hasToShowSound} onSoundClick={onSoundClick} />
       <SorterElements
         elements={JSON.parse(JSON.stringify(elements))}
         /*
@@ -48,7 +50,9 @@ sortElements.propTypes = {
   onShuffleClick: PropTypes.func.isRequired,
   onSorterMethodsClick: PropTypes.func.isRequired,
   shufflerOption: PropTypes.object.isRequired,
-  sorterMethodsOption: PropTypes.object.isRequired
+  sorterMethodsOption: PropTypes.object.isRequired,
+  hasToShowSound: PropTypes.bool.isRequired,
+  onSoundClick: PropTypes.func.isRequired
 }
 
 export default sortElements

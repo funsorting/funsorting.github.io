@@ -10,7 +10,8 @@ class ShufflerState extends Component {
     super(props)
 
     this.state = {
-      selectedOption: props.shufflerOption
+      selectedOption: props.shufflerOption,
+      hasSound: false
     }
 
     this.options = Shufflers
@@ -18,10 +19,18 @@ class ShufflerState extends Component {
 
   onShuffleClick = (option) => {
     this.props.onShuffleClick(option)
-    console.log('option', option)
+
     this.setState({
       selectedOption: option
     })
+  }
+
+  onSoundClick = () => {
+    this.setState({
+      hasSound: !this.state.hasSound
+    })
+
+    this.props.onSoundClick()
   }
 
   render(){
@@ -30,6 +39,9 @@ class ShufflerState extends Component {
         options={this.options}
         selectedOption={this.state.selectedOption}
         onShuffleClick={this.onShuffleClick}
+        onSoundClick={this.onSoundClick}
+        hasSound={this.state.hasSound}
+        hasToShowSound={this.props.hasToShowSound}
       />
     )
   }
@@ -37,7 +49,9 @@ class ShufflerState extends Component {
 
 ShufflerState.propTypes = {
   onShuffleClick: PropTypes.func.isRequired,
-  shufflerOption: PropTypes.object.isRequired
+  shufflerOption: PropTypes.object.isRequired,
+  hasToShowSound: PropTypes.bool.isRequired,
+  onSoundClick: PropTypes.func.isRequired
 }
 
 export default ShufflerState
