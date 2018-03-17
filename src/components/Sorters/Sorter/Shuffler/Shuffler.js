@@ -25,7 +25,7 @@ const Shuffler = ({ options, selectedOption, onShuffleClick, hasToShowSound, onS
     </div>
     {
       hasToShowSound ?
-      <span>
+      <span className={bem('sound')}>
         <span>Sound:</span>
         <Button
           text={hasSound ? 'ON' : 'OFF'}
