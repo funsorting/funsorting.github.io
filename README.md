@@ -1,6 +1,6 @@
 ![funsorting!](https://funsorting.github.io/src/assets/logo.png)
 ======
-An easy and fun way to understand sorting algorithms! 
+An easy and fun way to understand sorting algorithms!
 
 Made for programmers with ❤ by programmers
 
@@ -11,4 +11,4 @@ Please send it via issues: https://github.com/funsorting/funsorting.github.io/is
 Texts and code examples are located at `assets` folder: https://github.com/funsorting/funsorting.github.io/tree/master/src/assets
 
 # How to run at your machine
-- You only need `node` and `npm` , execute `npm i` to install dependencies and `npm start` to run!
+You only need `node` and `npm` , execute `npm i` to install dependencies and `npm start` to run!
