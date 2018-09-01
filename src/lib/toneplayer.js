@@ -8,7 +8,7 @@ this.oscillator = audioCtx.createOscillator();
 this.oscillator.type = 'square';
 this.oscillator.start();
 this.oscillator.frequency.value = 0
-this.oscillator.connect(audioCtx.destination);
+this.oscillator.connect(gainNode);
 
 const play = (frequency) => {
   this.oscillator.frequency.value = frequency;

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import axios from 'axios'
 
-import Information from './Information'
+import Code from './Code'
 
-class InformationState extends Component {
+class CodeState extends Component {
   constructor(props) {
     super(props)
 
@@ -16,17 +16,17 @@ class InformationState extends Component {
 
   componentDidUpdate() {
     const { id } = this.props.sorterChangeData.sorterMethodsOption
-    axios.get(`/src/assets/${id.toLowerCase()}Sorter.html`)
+    axios.get(`/src/assets/${id.toLowerCase()}SorterCode.html`)
          .then(({ data }) => this.setState({ content: data }))
   }
 
   render() {
-    return <Information content={this.state.content} />
+    return <Code content={this.state.content} />
   }
 }
 
-InformationState.propTypes = {
+CodeState.propTypes = {
   sorterChangeData: PropTypes.object.isRequired
 }
 
-export default InformationState
+export default CodeState

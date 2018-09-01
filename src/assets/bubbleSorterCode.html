@@ -1,0 +1,18 @@
+<h1>Pseudo-Code Example</h1>
+<div>   
+  <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">procedure</span> bubbleSort( A : list <span style="color: #008800; font-weight: bold">of</span> sortable items )
+    n <span style="color: #333333">=</span> length(A)
+    repeat
+        newn <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">0</span>
+        <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">1</span> <span style="color: #008800; font-weight: bold">to</span> n<span style="color: #333333">-</span><span style="color: #6600EE; font-weight: bold">1</span> inclusive <span style="color: #008800; font-weight: bold">do</span>
+            <span style="color: #008800; font-weight: bold">if</span> A[i<span style="color: #333333">-</span><span style="color: #6600EE; font-weight: bold">1</span>] <span style="color: #333333">&gt;</span> A[i] <span style="color: #008800; font-weight: bold">then</span>
+                swap(A[i<span style="color: #333333">-</span><span style="color: #6600EE; font-weight: bold">1</span>], A[i])
+                newn <span style="color: #333333">=</span> i
+            <span style="color: #008800; font-weight: bold">end</span> <span style="color: #008800; font-weight: bold">if</span>
+        <span style="color: #008800; font-weight: bold">end</span> <span style="color: #008800; font-weight: bold">for</span>
+        n <span style="color: #333333">=</span> newn
+    <span style="color: #008800; font-weight: bold">until</span> n <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">0</span>
+<span style="color: #008800; font-weight: bold">end</span> <span style="color: #008800; font-weight: bold">procedure</span>
+</pre></div>
+
+</div>

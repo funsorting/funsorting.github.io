@@ -7,7 +7,7 @@ import './SortElement.less'
 const bem = bemClassName
 
 const sortElement = (props) => {
-  const { number, wasSorted, isSorting } = props
+  const { number, wasSorted, isSorting, hasSorted } = props
 
   const rgb = [0, 0, 0]
   const colorMultiplier = number * 15
@@ -38,17 +38,18 @@ const sortElement = (props) => {
     'height': `${height}%`
   }
 
+  const barClasses = []
+  if(isSorting) barClasses.push('isSorting')
+  if(hasSorted) barClasses.push('hasSorted')
+
   return (
     <div className={bem('sortElement')}>
       <div className={bem('sortElement', 'element', [isSorting ? 'isSorting' : ''])}>
-
         <div className={bem('sortElement' ,'number')}>{number}</div>
         <div className={bem('sortElement', 'barContainer')}>
-          <div className={bem('sortElement', 'bar', [isSorting ? 'isSorting' : ''])} style={style}></div>
+          <div className={bem('sortElement', 'bar', barClasses)} style={style}></div>
         </div>
       </div>
-
-
     </div>
   )
 }
@@ -56,7 +57,8 @@ const sortElement = (props) => {
 sortElement.propTypes = {
   number: PropTypes.number,
   wasSorted: PropTypes.bool,
-  isSorting: PropTypes.bool
+  isSorting: PropTypes.bool,
+  hasSorted: PropTypes.bool
 }
 
 export default sortElement

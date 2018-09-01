@@ -55,7 +55,7 @@ const MergeSorter = (list, cb) => {
       c.isSorting = true
     })
 
-    cb(JSON.parse(JSON.stringify(cc)))
+    cb(JSON.parse(JSON.stringify(cc)), cc.find(x => x.isSorting).position)
 
     list.forEach((x) => x.isSorting = false)
 

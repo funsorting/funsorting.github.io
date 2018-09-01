@@ -1,0 +1,30 @@
+<h1>C-like Code Example</h1>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/* a[0] to a[n-1] is the array to sort */</span>
+<span style="color: #333399; font-weight: bold">int</span> i,j;
+<span style="color: #333399; font-weight: bold">int</span> n; <span style="color: #888888">// initialise to a&#39;s length</span>
+
+<span style="color: #888888">/* advance the position through the entire array */</span>
+<span style="color: #888888">/*   (could do j &lt; n-1 because single element is also min element) */</span>
+<span style="color: #008800; font-weight: bold">for</span> (j = <span style="color: #6600EE; font-weight: bold">0</span>; j &lt; n-<span style="color: #6600EE; font-weight: bold">1</span>; j++)
+{
+    <span style="color: #888888">/* find the min element in the unsorted a[j .. n-1] */</span>
+
+    <span style="color: #888888">/* assume the min is the first element */</span>
+    <span style="color: #333399; font-weight: bold">int</span> iMin = j;
+    <span style="color: #888888">/* test against elements after j to find the smallest */</span>
+    <span style="color: #008800; font-weight: bold">for</span> (i = j+<span style="color: #6600EE; font-weight: bold">1</span>; i &lt; n; i++)
+    {
+        <span style="color: #888888">/* if this element is less, then it is the new minimum */</span>
+        <span style="color: #008800; font-weight: bold">if</span> (a[i] &lt; a[iMin])
+        {
+            <span style="color: #888888">/* found new minimum; remember its index */</span>
+            iMin = i;
+        }
+    }
+
+    <span style="color: #008800; font-weight: bold">if</span> (iMin != j)
+    {
+        swap(a[j], a[iMin]);
+    }
+}
+</pre></div>
