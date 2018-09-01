@@ -1,24 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>funsorting</title>
+    <title>funsorting!</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="src/assets/funlogo.png"/>
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <style>
       body {
         font-family: 'VT323', monospace;
         background-image: url('src/assets/background.jpg');
         background-repeat: repeat;
-        background-position: center center;
+        background-position: center top;
         background-size: 100%;
       }
 
       #app {
         width: 80%;
+      }
+
+
+      .tour {
+        position:absolute;
+        display: flex;
+        opacity: 0;
+        transition: opacity 1.5s ease;
+      }
+
+      .tour.showing {
+
+        opacity: 1;
+      }
+
+      .tour div {
+        background-color: #e8e6846b;
+        padding: 0.2rem;
+      }
+
+      .tour img {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      #tourShufflerButtons img, #tourSorterMethods img {
+        transform: rotate(180deg);
+      }
+
+      #tourShufflerButtons div {
+        width: 20rem;
       }
     </style>
   </head>
@@ -27,7 +58,24 @@
     <center>
       <img src="src/assets/logo.png" />
 
-      <div id="app" class="app" />
+      <div id="app" class="app"></div>
+
+      <span>for programmers made with <span style="color: #e25555;">&hearts;</span> by programmers</span>
+
+
+      <div id="tourShufflerButtons" class="tour">
+        <div>The way of how original data are organized can make huge difference, try changing that!</div>
+        <img src="src/assets/arrow.png" />
+      </div>
+      <div id="tourSoundButton" class="tour">
+        <div>Sound helps understand the sorting, and it's fun!</div>
+        <img src="src/assets/arrow.png" />
+      </div>
+      <div id="tourSorterMethods" class="tour">
+        <img src="src/assets/arrow.png" />
+        <div>These are different sorting algorithms, see how different they act!</div>
+      </div>
+      <script src="src/lib/tour.js"></script>
     </center>
   </body>
 </html>

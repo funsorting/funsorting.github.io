@@ -1,0 +1,5 @@
+{
+ "name": "Information",
+ "private": true,
+ "main": "./Information.state.js"
+}

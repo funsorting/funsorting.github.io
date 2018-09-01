@@ -5,24 +5,16 @@ import Sorter from './Sorter'
 
 import Sorters from 'domain/sorters/Sorters'
 import Shufflers from 'domain/Shufflers'
+import Toneplayer from 'lib/toneplayer'
 
 class SorterState extends Component {
   constructor(props) {
     super(props)
 
-    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    this.oscillator = audioCtx.createOscillator();
-    this.oscillator.type = 'square';
-     // value in hertz
-    this.oscillator.connect(audioCtx.destination);
-
     if(this.props.id === 0){
       this.shufflerOption = Shufflers[0]
       this.sorterMethodsOption = Sorters[0]
       this.hasToShowSound = true
-
-      this.oscillator.start();
-      this.oscillator.frequency.value = 0
     }
 
     if(this.props.id === 1){
@@ -33,9 +25,7 @@ class SorterState extends Component {
     this.elements = []
     this.sortTickTimeouts = []
 
-
     this.hasToPlay = false
-    console.log("A", this.hasToPlay)
     this.isSorting = false
 
     this.onSoundClick = this.onSoundClick.bind(this)
@@ -44,18 +34,21 @@ class SorterState extends Component {
   onSoundClick() {
     this.hasToPlay = !this.hasToPlay
     if(!this.hasToPlay){
-      this.oscillator.frequency.value = 0
+      Toneplayer.mute()
     }
-  }
-  playSound (frequency) {
-    this.oscillator.frequency.value = frequency;
   }
 
   componentDidMount() {
-    this.onShuffleClick(this.shufflerOption)
+    if(this.props.id === 0){
+      this.onShuffleClick(this.shufflerOption)
+    }
   }
 
-
+  componentDidUpdate({ sorterChangeData }) {
+    if(sorterChangeData.id !== undefined && sorterChangeData !== this.props.sorterChangeData &&  sorterChangeData.id !== this.props.id) {
+      this.onShuffleClick(this.shufflerOption, false)
+    }
+  }
 
   warnSorterChange = () => {
     this.props.warnSorterChange({
@@ -65,8 +58,8 @@ class SorterState extends Component {
     })
   }
 
-  onShuffleClick = (shufflerOption, callback) => {
-    this.warnSorterChange()
+  onShuffleClick = (shufflerOption, warnChanges = true) => {
+    if(warnChanges) this.warnSorterChange()
     this.shufflerOption = shufflerOption
 
     const ELEMENTS_SIZE = 50
@@ -104,33 +97,29 @@ class SorterState extends Component {
     }
     let timeouts = 0;
 
-    this.sorterMethodsOption.sorter(this.elements, (list, i) => {
-      const listCopy = list
+    this.sorterMethodsOption.sorter(this.elements, (list, i, i2) => {
+      //const listCopy = list
       if(i){
-        listCopy[i].isSorting = true
+        list[i].isSorting = true
       }
 
-
-
-
       const newTimeout = setTimeout(() => {
-
-
         this.elements = list
         this.forceUpdate()
-
-
 
         const y = i
         const note = y * 30
 
         timeouts--
         if(note > 0 && this.hasToPlay){
-          this.playSound(note)
+          Toneplayer.play(note)
+        }
+
+        if(i2 && this.hasToPlay){
+          Toneplayer.play(i2 * 30)
         }
         if(timeouts === 0){
-          console.log(">>>>>>>>>")
-          this.oscillator.frequency.value = 0
+          Toneplayer.mute()
         }
 
       }, getNextTimeoutTime())
@@ -139,11 +128,7 @@ class SorterState extends Component {
     })
 
     timeouts = this.sortTickTimeouts.length
-
-
   }
-
-
 
   render() {
     return <Sorter

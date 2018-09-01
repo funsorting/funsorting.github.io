@@ -11,7 +11,7 @@ const QuickSort = (list, cb) => {
         x.isSorting = false
       }
     })
-    cb(JSON.parse(JSON.stringify(list)))
+    cb(JSON.parse(JSON.stringify(list)), i)
   }
 
   const partition = (arr, pivot, left, right) => {

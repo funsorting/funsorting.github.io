@@ -23,7 +23,7 @@ const SelectionSorter = (items, cb) => {
         }
       })
 
-      cb(JSON.parse(JSON.stringify(items)))
+      cb(JSON.parse(JSON.stringify(items)), i, min)
 		}
 	}
 

@@ -1,27 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-
 import SortElement from './SortElement'
 import SorterElements from './SorterElements'
-
 
 class SorterElementsState extends Component {
   constructor(props) {
     super(props)
 
-
     this.elements = props.elements
 
     this.shufflerOption = undefined
     this.sorterMethodsOption = undefined
-
   }
 
-
-
   componentWillReceiveProps({ elements, shufflerOption, sorterMethodsOption }) {
-
     this.elements = elements
 
     this.forceUpdate()
@@ -41,17 +34,6 @@ class SorterElementsState extends Component {
         })
       }
     })*/
-  }
-
-
-  onSort = () => {
-    const {
-
-    } = this.props
-
-
-
-
   }
 
   render(){
