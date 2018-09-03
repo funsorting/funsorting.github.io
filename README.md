@@ -2,13 +2,15 @@
 ======
 An easy and fun way to understand sorting algorithms!
 
-Made for programmers with ❤ by programmers
-
 # Contributing
 Do you have an idea to make this project better?
 Please send it via issues: https://github.com/funsorting/funsorting.github.io/issues
 
-Texts and code examples are located at `assets` folder: https://github.com/funsorting/funsorting.github.io/tree/master/src/assets
+The texts and code examples are located at `src/assets` directory
+
+Any new ideas or fixes are appreciated, please just open an issue before creating a PR.
 
 # How to run at your machine
-You only need `node` and `npm` , execute `npm i` to install dependencies and `npm start` to run!
+This project was created with Node.JS, just install the dependencies `npm i` and run `npm start`
+
+Please use the `development` branch
