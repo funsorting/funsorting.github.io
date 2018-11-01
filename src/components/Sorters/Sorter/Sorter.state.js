@@ -22,6 +22,7 @@ class SorterState extends Component {
       this.sorterMethodsOption = Sorters[0]
     }
 
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     this.elements = []
     this.sortTickTimeouts = []
 
@@ -62,7 +63,7 @@ class SorterState extends Component {
     if(warnChanges) this.warnSorterChange()
     this.shufflerOption = shufflerOption
 
-    const ELEMENTS_SIZE = 20
+    const ELEMENTS_SIZE = this.isMobile ? 20 : 50
     const numbers = Array.from(new Array(ELEMENTS_SIZE), (x,i) => i + 1)
     const shuffledNumbers = this.shufflerOption.shufflerFunction(numbers)
 
@@ -92,7 +93,7 @@ class SorterState extends Component {
 
     let accumulativeTimeoutTime = 0
     const getNextTimeoutTime = () => {
-      accumulativeTimeoutTime += 200
+      accumulativeTimeoutTime += this.isMobile ? 200 : 100
       return accumulativeTimeoutTime
     }
     let timeouts = 0;
@@ -108,7 +109,7 @@ class SorterState extends Component {
         this.forceUpdate()
 
         const y = i
-        const note = y * 60
+        const note = y * (this.isMobile ? 60 : 30)
 
         timeouts--
         if(note > 0 && this.hasToPlay){
