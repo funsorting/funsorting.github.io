@@ -10,7 +10,7 @@ const bem = bemClassName.bind(null, 'shuffler')
 
 const Shuffler = ({ options, selectedOption, onShuffleClick, hasToShowSound, onSoundClick, hasSound }) => (
   <div className={bem()}>
-    <span>Shuffle method:</span>
+    
     <div className={bem('buttons')}>
       {
         options.map((option, i) =>

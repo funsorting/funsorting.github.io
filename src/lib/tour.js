@@ -11,11 +11,11 @@ const showTour = () => {
   const soundButtonPositions = soundButton.getBoundingClientRect()
   const sorterMethodsPositions = sorterMethods.getBoundingClientRect()
 
-  tourShufflerButtons.style.top = shufflerButtonsPositions.top + 30 + "px"
-  tourShufflerButtons.style.left = shufflerButtonsPositions.left - 100 + "px"
+  tourShufflerButtons.style.top = shufflerButtonsPositions.top + 60 + "px"
+  tourShufflerButtons.style.left = shufflerButtonsPositions.left - 0 + "px"
 
-  tourSoundButton.style.top = soundButtonPositions.top - 25 + "px"
-  tourSoundButton.style.left = soundButtonPositions.left - 150  + "px"
+  tourSoundButton.style.top = soundButtonPositions.top - 40 + "px"
+  tourSoundButton.style.left = soundButtonPositions.left - 250  + "px"
 
   tourSorterMethods.style.top = sorterMethodsPositions.top + 40 + "px"
   tourSorterMethods.style.left = sorterMethodsPositions.left + 50 + "px"
@@ -24,7 +24,7 @@ const showTour = () => {
   tourSoundButton.classList.add('showing');
   tourSorterMethods.classList.add('showing');
 
-  document.body.addEventListener("click", () => {
+  const clearTour = () => {
     tourShufflerButtons.classList.remove('showing');
     tourSoundButton.classList.remove('showing');
     tourSorterMethods.classList.remove('showing');
@@ -34,7 +34,10 @@ const showTour = () => {
       tourSoundButton.style.display = 'none'
       tourSorterMethods.style.display = 'none'
     }, 1000)
-  })
+  }
+
+  document.body.addEventListener("click", clearTour)
+  document.body.addEventListener("touchstart", clearTour)
 }
 
 setTimeout(() => showTour(), 1200)

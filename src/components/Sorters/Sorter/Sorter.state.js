@@ -62,7 +62,7 @@ class SorterState extends Component {
     if(warnChanges) this.warnSorterChange()
     this.shufflerOption = shufflerOption
 
-    const ELEMENTS_SIZE = 50
+    const ELEMENTS_SIZE = 20
     const numbers = Array.from(new Array(ELEMENTS_SIZE), (x,i) => i + 1)
     const shuffledNumbers = this.shufflerOption.shufflerFunction(numbers)
 
@@ -92,7 +92,7 @@ class SorterState extends Component {
 
     let accumulativeTimeoutTime = 0
     const getNextTimeoutTime = () => {
-      accumulativeTimeoutTime += 50
+      accumulativeTimeoutTime += 200
       return accumulativeTimeoutTime
     }
     let timeouts = 0;
@@ -108,7 +108,7 @@ class SorterState extends Component {
         this.forceUpdate()
 
         const y = i
-        const note = y * 30
+        const note = y * 60
 
         timeouts--
         if(note > 0 && this.hasToPlay){
