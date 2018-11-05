@@ -1,5 +1,0 @@
-{
- "name": "Sorter",
- "private": true,
- "main": "./Sorter.state.js"
-}
