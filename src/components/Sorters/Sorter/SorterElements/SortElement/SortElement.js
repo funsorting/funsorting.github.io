@@ -8,10 +8,10 @@ const bem = bemClassName
 
 const sortElement = (props) => {
   const { number, wasSorted, isSorting, hasSorted } = props
-  this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-  
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
   const rgb = [0, 0, 0]
-  const colorMultiplier = number * (this.isMobile ? 35 : 15)
+  const colorMultiplier = number * (isMobile ? 35 : 15)
 
   if(colorMultiplier < 255){
     rgb[0] = 255
@@ -31,7 +31,7 @@ const sortElement = (props) => {
   const [r, g, b] = rgb
 
 
-  const height = isSorting ? 100 : number * (this.isMobile ? 4 : 2)
+  const height = isSorting ? 100 : number * (isMobile ? 4 : 2)
 
   const style = {
     'backgroundColor': `rgb(${r}, ${g}, ${b})`,

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress --colors",
-    "start": "webpack-dev-server --progress --colors",
+    "build": "webpack --config webpack.prod --progress --colors",
+    "start": "webpack-dev-server --config webpack.dev --progress --colors",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "NODE_PATH=./ mocha -c -S --recursive --compilers js:babel-core/register --require ignore-styles --require src/**/*.spec.js"
   },
@@ -30,14 +30,16 @@
     "bem-classname": "^0.1.1",
     "css-loader": "^0.28.9",
     "file-loader": "^1.1.6",
-    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-plugin": "^3.2.0",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "style-loader": "^0.20.1",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
   },
   "dependencies": {
     "axios": "^0.18.0"
