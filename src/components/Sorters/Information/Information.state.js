@@ -12,12 +12,17 @@ class InformationState extends Component {
     this.state = {
       content: ''
     }
+    this.lastId = 0
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { id } = this.props.sorterChangeData.sorterMethodsOption
-    axios.get(`/src/assets/${id.toLowerCase()}Sorter.html`)
-         .then(({ data }) => this.setState({ content: data }))
+
+    if(!prevProps.sorterChangeData.sorterMethodsOption || id != prevProps.sorterChangeData.sorterMethodsOption.id){
+      axios.get(`/src/assets/${id.toLowerCase()}Sorter.html`)
+           .then(({ data }) => this.setState({ content: data }))
+    }
+
   }
 
   render() {
