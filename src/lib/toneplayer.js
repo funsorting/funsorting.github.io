@@ -1,21 +1,27 @@
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const createOscillator = () => {
+  var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-var gainNode = audioCtx.createGain()
-gainNode.gain.value = 0.02 // 2 %
-gainNode.connect(audioCtx.destination)
+  var gainNode = audioCtx.createGain()
+  gainNode.gain.value = 0.02 // 2 %
+  gainNode.connect(audioCtx.destination)
 
-this.oscillator = audioCtx.createOscillator();
-this.oscillator.type = 'square';
-this.oscillator.start();
-this.oscillator.frequency.value = 0
-this.oscillator.connect(gainNode);
+  var oscillator = audioCtx.createOscillator();
+  oscillator.type = 'square';
+  oscillator.start();
+  oscillator.frequency.value = 0
+  oscillator.connect(gainNode);
+  return oscillator
+}
 
+let o
 const play = (frequency) => {
-  this.oscillator.frequency.value = frequency;
+  if(!o)
+    o = createOscillator()
+  o.frequency.value = frequency;
 }
 
 const mute = () => {
-  this.oscillator.frequency.value = 0;
+  o.frequency.value = 0;
 }
 
 module.exports = {
