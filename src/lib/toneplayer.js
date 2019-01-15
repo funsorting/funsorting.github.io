@@ -24,7 +24,7 @@ function webAudioTouchUnlock(context) {
 }
 
 
-let o
+let o = { frequency: { value: undefined }}
 const play = (frequency) => {
   if(!o) {
     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -43,11 +43,9 @@ const play = (frequency) => {
         o = createOscillator()
       })
       .catch((e) => { console.error(e) })
-
-
-    o.frequency.value = frequency;
   }
 
+  o.frequency.value = frequency;
 
 }
 
