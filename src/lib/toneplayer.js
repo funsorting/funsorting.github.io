@@ -2,7 +2,7 @@ const createOscillator = () => {
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
   var gainNode = audioCtx.createGain()
-  gainNode.gain.value = 0.02 // 2 %
+  gainNode.gain.value = 0.1 // 2 %
   gainNode.connect(audioCtx.destination)
 
   var oscillator = audioCtx.createOscillator();
