@@ -27,9 +27,27 @@
       }
 
       #app {
-        width: 80%;
+        max-width: 80%;
       }
 
+      #logo {
+        max-width: 80%;
+        margin-bottom: 2rem;
+      }
+
+      @media (max-width: 600px) {
+          #app {
+            max-width: 90%;
+          }
+
+          #github-fork {
+          max-width: 6.5rem;
+        }
+
+        .tour {
+          max-width: 18rem;
+        }
+      }
 
       .tour {
         position:absolute;
@@ -39,7 +57,6 @@
       }
 
       .tour.showing {
-
         opacity: 1;
       }
 
@@ -53,6 +70,10 @@
         height: 2rem;
       }
 
+      #tourSoundButton img{
+        transform: rotate(15deg);
+      }
+
       #tourShufflerButtons img, #tourSorterMethods img {
         transform: rotate(180deg);
       }
@@ -60,6 +81,7 @@
       #tourShufflerButtons div {
         width: 20rem;
       }
+
     </style>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <meta property="og:title" content="funsorting!">
@@ -68,9 +90,9 @@
     <meta property="og:url" content="http://funsorting.github.io">
   </head>
   <body>
-    <a href="https://github.com/funsorting/funsorting.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <a href="https://github.com/funsorting/funsorting.github.io"><img id="github-fork" style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
     <center>
-      <img src="src/assets/logo.png" />
+      <img src="src/assets/logo.png" id="logo"/>
 
       <div id="app" class="app"></div>
 
